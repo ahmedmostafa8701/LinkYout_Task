@@ -5,8 +5,7 @@ import 'package:link_you_task/features/todo/domain/repo/todo_repo.dart';
 
 class TodoApi extends TodoRepo{
   Dio dio;
-  int userId;
-  TodoApi({required this.dio, this.userId = 1});
+  TodoApi({required this.dio});
   @override
   Future<void> addTodo(TodoModel todoModel) async{
     await dio.post(BASE_URL+TODO_EndPoint+'add', data: todoModel.toJson());
@@ -23,7 +22,7 @@ class TodoApi extends TodoRepo{
   }
 
   @override
-  Future<List<TodoModel>> fetchTodos() async{
+  Future<List<TodoModel>> fetchTodos(int userId) async{
     var response = await dio.get('$BASE_URL${TODO_EndPoint}user/$userId');
     var todosJson = response.data['todos'] as List;
     return todosJson.map((todoJson) => TodoModel.fromJson(todoJson)).toList();

@@ -54,7 +54,7 @@ class _AddTodoCardState extends State<AddTodoCard> {
                 completed = false;
               });
             }:null,
-            child: Icon(Icons.check, color: controller.text.isNotEmpty ? colorScheme.primary : Colors.grey),
+            child: Icon(Icons.send, color: controller.text.isNotEmpty ? colorScheme.primary : Colors.grey),
           ),
           SizedBox(width: 10.w),
         ],

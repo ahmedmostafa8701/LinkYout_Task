@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_you_task/core/widgets/custom_card.dart';
+import 'package:link_you_task/features/auth/presentation/pages/login_page.dart';
 import 'package:link_you_task/features/todo/presentation/viewmodel/todo_cubit.dart';
 import 'package:link_you_task/features/todo/presentation/viewmodel/todo_state.dart';
 import 'package:link_you_task/features/todo/presentation/widgets/check_widget.dart';
@@ -35,6 +36,13 @@ class _TodoPageState extends State<TodoPage> {
             },
           ),
           SizedBox(width: 10.w),
+          GestureDetector(
+            child: Icon(Icons.logout),
+            onTap: () {
+              cubit.logout();
+            },
+          ),
+          SizedBox(width: 10.w),
         ],
       ),
       body: BlocListener<TodoCubit, TodoState>(
@@ -45,6 +53,8 @@ class _TodoPageState extends State<TodoPage> {
           } else if (state is TodoSuccess) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));
+          } else if (state is LogoutSuccessState) {
+            Navigator.of(context).popAndPushNamed(LoginPage.routeName);
           }
           setState(() {});
         },

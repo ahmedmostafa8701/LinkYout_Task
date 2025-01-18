@@ -27,7 +27,9 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if(state is LoginSuccess){
-            Navigator.pushNamed(context, TodoPage.routeName);
+            cubit.passwordController.clear();
+            cubit.usernameController.clear();
+            Navigator.popAndPushNamed(context, TodoPage.routeName);
           }else if(state is LoginFailure){
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid username or password')));
           }
@@ -55,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       hintText: 'Password',
                       suffixIcon: IconButton(
-                        icon: Icon(cubit.passwordHidden ? Icons.visibility_off: Icons.visibility),
+                        icon: Icon(cubit.passwordHidden ? Icons.visibility_off: Icons.visibility, color: colorScheme.primary,),
                         onPressed: (){
                           setState(() {
                             cubit.passwordHidden = !cubit.passwordHidden;

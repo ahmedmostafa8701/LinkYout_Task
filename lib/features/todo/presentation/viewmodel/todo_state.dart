@@ -13,3 +13,4 @@ class TodoSuccess extends TodoState{
   final String message;
   TodoSuccess({required this.todos, required this.message});
 }
+class LogoutSuccessState extends TodoState{}
