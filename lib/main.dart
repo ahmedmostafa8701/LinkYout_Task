@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_you_task/features/auth/presentation/pages/login_page.dart';
+import 'package:link_you_task/features/todo/presentation/pages/todo_page.dart';
 import 'package:link_you_task/providers.dart';
 import 'package:link_you_task/routes.dart';
 import 'package:link_you_task/theme/theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: providers,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,9 +33,9 @@ class MyApp extends StatelessWidget {
             title: 'Catalyst Task',
             theme: theme,
             routes: routes,
+            initialRoute: LoginPage.routeName,
             debugShowCheckedModeBanner: false,
           );
-        }
-    );
+        });
   }
 }
