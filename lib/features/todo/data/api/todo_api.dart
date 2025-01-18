@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:link_you_task/constant.dart';
-import 'package:link_you_task/features/todo/data/api/dio_auth.dart';
 import 'package:link_you_task/features/todo/domain/model/todo_model.dart';
 import 'package:link_you_task/features/todo/domain/repo/todo_repo.dart';
 
