@@ -15,12 +15,13 @@ Todos Management:
 Add, update, and delete todos locally.
 Sync todos with the remote API when the network is restored.
 Remote API data takes precedence. When synced, the app replaces the local todos with the latest data from the remote API and removes outdated entries.
-User Actions:
+Pagination: The home page in the application contain all the todos that exist in the server and loaded using pagination 20 todo at time
+User Actions: 
 Login and logout functionality for managing user sessions.
 Key Functionalities
 Offline Support: Enables full functionality without an internet connection.
 Remote Sync: Ensures data consistency by synchronizing with the remote API after the internet connection is restored.
-Pagination: The home page in the application contain all the todos that exist in the server and loaded using padination 20 todo at time
+
 Conflict Resolution: The app prioritizes remote API data during synchronization to ensure users always have the most accurate and up-to-date information.
 
 ![image](https://github.com/user-attachments/assets/350664a6-f0d4-4f43-bc1c-2a52ea0cf975)
