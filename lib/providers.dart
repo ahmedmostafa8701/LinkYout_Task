@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:link_you_task/db/database.dart';
 import 'package:link_you_task/features/auth/data/api/login_api.dart';
 import 'package:link_you_task/features/auth/presentation/viewmodel/login_cubit.dart';
+import 'package:link_you_task/features/home/data/home_page_api.dart';
 import 'package:link_you_task/features/todo/data/api/todo_api.dart';
 import 'package:link_you_task/features/todo/data/todo_local_repo_impl.dart';
 import 'package:link_you_task/features/user/user_repo_impl.dart';
@@ -19,5 +20,5 @@ List<SingleChildWidget> providers = [
   ),
   BlocProvider<LoginCubit>(
     create: (context) => LoginCubit(LoginApi(Dio()), UserRepoImpl(AppDb())),
-  )
+  ),
 ];

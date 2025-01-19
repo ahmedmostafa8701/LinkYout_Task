@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_you_task/features/auth/presentation/pages/login_page.dart';
+import 'package:link_you_task/features/home/presentation/pages/home_page.dart';
 import 'package:link_you_task/features/todo/presentation/viewmodel/todo_cubit.dart';
 import 'package:link_you_task/features/todo/presentation/viewmodel/todo_state.dart';
 import 'package:link_you_task/features/todo/presentation/widgets/todo_list_view.dart';
@@ -26,6 +27,13 @@ class _TodoPageState extends State<TodoPage> {
       appBar: AppBar(
         title: const Text('Todo'),
         actions: [
+          GestureDetector(
+            child: Icon(Icons.home),
+            onTap: () {
+              Navigator.of(context).pushNamed(HomePage.routeName);
+            },
+          ),
+          SizedBox(width: 10.w),
           GestureDetector(
             child: Icon(Icons.sync),
             onTap: () {
