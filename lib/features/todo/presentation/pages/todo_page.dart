@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:link_you_task/core/widgets/custom_card.dart';
 import 'package:link_you_task/features/auth/presentation/pages/login_page.dart';
 import 'package:link_you_task/features/todo/presentation/viewmodel/todo_cubit.dart';
 import 'package:link_you_task/features/todo/presentation/viewmodel/todo_state.dart';
-import 'package:link_you_task/features/todo/presentation/widgets/check_widget.dart';
 import 'package:link_you_task/features/todo/presentation/widgets/todo_list_view.dart';
 
-import '../../domain/model/todo_model.dart';
 import '../widgets/add_todo_cart.dart';
 
 class TodoPage extends StatefulWidget {
@@ -47,6 +44,7 @@ class _TodoPageState extends State<TodoPage> {
       ),
       body: BlocListener<TodoCubit, TodoState>(
         listener: (context, state) {
+          setState(() {});
           if (state is TodoFailure) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));
@@ -56,7 +54,6 @@ class _TodoPageState extends State<TodoPage> {
           } else if (state is LogoutSuccessState) {
             Navigator.of(context).popAndPushNamed(LoginPage.routeName);
           }
-          setState(() {});
         },
         child: CustomScrollView(
           slivers: [

@@ -1,4 +1,6 @@
-class TodoModel {
+import 'package:equatable/equatable.dart';
+
+class TodoModel extends Equatable{
   int id;
   String todo;
   bool completed;
@@ -21,4 +23,8 @@ class TodoModel {
       'userId' : userId
     };
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id, todo, completed, userId];
 }

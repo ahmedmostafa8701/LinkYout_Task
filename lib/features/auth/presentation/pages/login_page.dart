@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_you_task/features/todo/presentation/pages/todo_page.dart';
 
+import '../../../todo/presentation/viewmodel/todo_cubit.dart';
 import '../viewmodel/login_cubit.dart';
 import '../viewmodel/login_state.dart';
 
@@ -29,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           if(state is LoginSuccess){
             cubit.passwordController.clear();
             cubit.usernameController.clear();
+            BlocProvider.of<TodoCubit>(context).sync();
             Navigator.popAndPushNamed(context, TodoPage.routeName);
           }else if(state is LoginFailure){
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid username or password')));

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:link_you_task/features/auth/domain/model/user_model.dart';
 import 'package:link_you_task/features/todo/data/todo_local_repo.dart';
@@ -13,15 +11,14 @@ class TodoCubit extends Cubit<TodoState>{
   TodoCubit({
     required this.remoteRepo,
     required this.localRepo,
-  }) : super(TodoInitial()){
-    sync();
-  }
+    required this.userRepo
+  }) : super(TodoInitial());
   final TodoRepo remoteRepo;
   final TodoLocalRepo localRepo;
+  UserRepo userRepo;
   UserModel ?user;
-  UserRepo userRepo = UserRepo();
   List<TodoModel> todos = [];
-  void sync() async{
+  Future<void> sync() async{
     if(user == null){
       user = await userRepo.getUser();
     }
@@ -31,7 +28,7 @@ class TodoCubit extends Cubit<TodoState>{
         logout();
         return;
       }
-      todos = await remoteRepo.fetchTodos(user!.id!).timeout(const Duration(seconds: 7));
+      todos = List.from(await remoteRepo.fetchTodos(user!.id!).timeout(const Duration(seconds: 7)));
       emit(TodoSuccess(todos: todos, message: 'Todos fetched successfully'));
       await localRepo.deleteTodos();
       await localRepo.insertTodos(todos);
@@ -49,34 +46,34 @@ class TodoCubit extends Cubit<TodoState>{
       emit(TodoFailure(message: "Failed to logout"));
     }
   }
-  void addTodo(TodoModel todoModel) async{
+  Future<void> addTodo(TodoModel todoModel) async{
     emit(TodoLoading());
     try{
       todos.add(todoModel);
       await remoteRepo.addTodo(todoModel).timeout(const Duration(seconds: 7));
-      emit(TodoSuccess(todos: todos, message: 'Added successfully'));
+      emit(TodoSuccess(todos: todos.toList(), message: 'Added successfully'));
     }catch(e){
       emit(TodoFailure(message: 'Failed to add remotely'));
     }
     await localRepo.insertTodo(todoModel);
   }
-  void editTodo(int id, TodoModel todoModel) async{
+  Future<void> editTodo(int id, TodoModel todoModel) async{
     emit(TodoLoading());
     try{
       todos[todos.indexWhere((element) => element.id == id)] = todoModel;
       await remoteRepo.editTodo(id, todoModel).timeout(const Duration(seconds: 7));
-      emit(TodoSuccess(todos: todos, message: 'Edited successfully'));
+      emit(TodoSuccess(todos: todos.toList(), message: 'Edited successfully'));
     }catch(e){
       emit(TodoFailure(message: 'Failed to edit remotely'));
     }
     await localRepo.updateTodoById(id, todoModel);
   }
-  void deleteTodo(int id) async{
+  Future<void> deleteTodo(int id) async{
     emit(TodoLoading());
     try{
       todos.removeWhere((element) => element.id == id);
       await remoteRepo.deleteTodo(id).timeout(const Duration(seconds: 7));
-      emit(TodoSuccess(todos: todos, message: 'Deleted successfully'));
+      emit(TodoSuccess(todos: todos.toList(), message: 'Deleted successfully'));
     }catch(e){
       emit(TodoFailure(message: 'Failed to delete remotely'));
     }
