@@ -24,7 +24,6 @@ Remote Sync: Ensures data consistency by synchronizing with the remote API after
 
 Conflict Resolution: The app prioritizes remote API data during synchronization to ensure users always have the most accurate and up-to-date information.
 
-![image](https://github.com/user-attachments/assets/350664a6-f0d4-4f43-bc1c-2a52ea0cf975)
 ![image](https://github.com/user-attachments/assets/a1e638aa-f99a-4a66-8ede-1fc5a39cbb27)
 ![image](https://github.com/user-attachments/assets/a47e90e8-c2c6-42bc-8f46-e8e5accacd50)
 ![image](https://github.com/user-attachments/assets/13f84dd9-ab93-490d-91d6-ca0255684c56)
