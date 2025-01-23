@@ -32,7 +32,7 @@ class SplashScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Catalyst Task',
+              'LinkYou Task',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
