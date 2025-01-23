@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          title: 'Catalyst Task',
+          title: 'LinkYou Task',
           theme: theme,
           routes: routes,
           debugShowCheckedModeBanner: false,
